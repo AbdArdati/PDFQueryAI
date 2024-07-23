@@ -46,6 +46,23 @@ folder_path = "db"
 pdf_dir = "pdf"
 
 
+def initialize_vector_store():
+    if not os.path.exists("db"):
+        os.makedirs("db")
+    # Perform a test operation to ensure proper initialization
+    try:
+        vector_store = Chroma(persist_directory=folder_path, embedding_function=embedding)
+        # Example check to validate database
+        if not vector_store.get():
+            print("Vector store is empty or not properly initialized.")
+            # Additional initialization steps if needed
+        return vector_store
+    except Exception as e:
+        print(f"Error initializing vector store: {str(e)}")
+        return None
+
+vector_store = initialize_vector_store()
+
 if not os.path.exists(folder_path):
     print(f"Error: Directory {folder_path} does not exist.")
 
