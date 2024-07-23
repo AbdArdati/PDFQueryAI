@@ -1,16 +1,16 @@
-# AI-Powered PDF Query Application
+# AI-Powered PDF Query Application 🚀
 
 This repository contains a Flask web application that allows users to upload PDF documents, query their contents, and retrieve answers using an AI language model. The application integrates several functionalities to manage PDFs, handle user queries, and maintain usage statistics.
 
-## High-Level Overview
+## High-Level Overview 🌟
 
 The application provides an interface for:
-- Uploading and managing PDF documents.
-- Submitting queries to retrieve information from uploaded PDFs.
-- Tracking PDF usage statistics.
-- Performing administrative operations like clearing data and deleting files.
+- 📄 **Uploading and managing PDF documents**.
+- ❓ **Submitting queries to retrieve information from uploaded PDFs**.
+- 📊 **Tracking PDF usage statistics**.
+- 🔧 **Performing administrative operations like clearing data and deleting files**.
 
-### Key Features
+### Key Features 🔑
 
 1. **PDF Management**:
    - **Upload PDFs**: Users can upload PDF files, which are then processed and stored in a database.
@@ -26,7 +26,7 @@ The application provides an interface for:
    - **Clear Database**: Deletes all stored data and PDFs.
    - **PDF Usage Statistics**: Provides statistics on how often each PDF has been queried.
 
-## Low-Level Overview
+## Low-Level Overview 🔍
 
 ### Initialization and Setup
 
@@ -37,7 +37,7 @@ The application provides an interface for:
 
 - **`/`**: Serves the main HTML page for user interaction.
   
-- **`/ai`**: 
+- **`/ai`**:
   - **Method**: `POST`
   - **Function**: Accepts a JSON request containing a query, passes it to the AI model, and returns the generated response.
 
@@ -77,7 +77,7 @@ The application provides an interface for:
   - **Method**: `GET`
   - **Function**: Provides usage statistics on how often each PDF has been queried.
 
-### Internal Functions
+### Internal Functions 🔧
 
 - **`file_exists(filename)`**: Checks if a file with the given name exists in the directory.
   
@@ -85,43 +85,43 @@ The application provides an interface for:
   
 - **`perform_ocr(pdf_path)`**: Placeholder function for performing Optical Character Recognition (OCR) on a PDF if it is not structured. This needs to be implemented with an actual OCR library like `pytesseract`.
 
-### Error Handling
+### Error Handling ⚠️
 
 - The application includes basic error handling for missing data, file operations, and vector store interactions. For example, if a file is not found or an operation fails, the application returns an appropriate error message and HTTP status code.
 
-### Summary
+### Summary 📝
 
 Overall, the application provides a structured way to manage and interact with PDF documents using an AI model. It integrates file management, data processing, and querying capabilities into a Flask web service, allowing users to upload, query, and manage PDFs while also keeping track of usage statistics and providing administrative functionalities.
 
-## Installation Instructions
+## Installation Instructions ⚙️
 
 1. **Clone the Repository**:
-    \```
+    ```
     git clone https://github.com/yourusername/your-repo-name.git
     cd your-repo-name
-    \```
+    ```
 
 2. **Create a Virtual Environment**:
-    \```
+    ```
     python -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    \```
+    ```
 
 3. **Install Dependencies**:
-    \```
+    ```
     pip install -r requirements.txt
-    \```
+    ```
 
 4. **Run the Application**:
-    \```
+    ```
     python app.py
-    \```
+    ```
 
-## License
+## License 🛡️
 
 This project is licensed under the Apache 2.0 License. The core components of this application follow the work from [https://github.com/ThomasJay/RAG](https://github.com/ThomasJay/RAG) which is also licensed under Apache 2.0.
 
-\```
+```
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -133,4 +133,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-\```
+```
