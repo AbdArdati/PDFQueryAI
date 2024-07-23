@@ -95,27 +95,52 @@ Overall, the application provides a structured way to manage and interact with P
 
 ## Installation Instructions ⚙️
 
-1. **Clone the Repository**:
-    ```
-    git clone https://github.com/yourusername/your-repo-name.git
-    cd your-repo-name
-    ```
+### 1. Download and Install Ollama
 
-2. **Create a Virtual Environment**:
-    ```
+To use the `Ollama` model, follow these steps to download and install it based on your operating system:
+
+1. **Visit the Ollama Download Page:**
+   Go to [Ollama Download Page](https://ollama.com/download).
+
+2. **Download the Installer:**
+   Choose the appropriate installer for your operating system and download it.
+
+3. **Install Ollama:**
+   Follow the installation instructions provided on the download page for your specific operating system.
+
+4. **Verify Installation:**
+   After installation, verify that Ollama is installed correctly by running the following command in your terminal or command prompt:
+
+   ```bash
+   ollama --version
+
+5. **Run the Llama3 Model:**
+   Once Ollama is installed, start the llama3 model by running the following command in your terminal or command prompt:
+
+   ```bash
+   ollama run llama3
+   
+### 2. **Clone the Repository**:
+    
+    git clone https://github.com/AbdArdati/PDFQueryAI.git
+    cd PDFQueryAI
+   
+
+### 3. **Create a Virtual Environment**:
+    
     python -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    ```
+    
 
-3. **Install Dependencies**:
-    ```
+### 4. **Install Dependencies**:
+    
     pip install -r requirements.txt
-    ```
+    
 
-4. **Run the Application**:
-    ```
+### 5. **Run the Application**:
+     
     python app.py
-    ```
+     
 
 ## License 🛡️
 
