@@ -288,7 +288,6 @@ function displayPDFUsage(pdfUsage) {
     usageDiv.innerHTML += usageHTML;
 }
 
-
 function displayQueryUsage(queryUsage) {
     const usageDiv = document.getElementById('queryUsageStats');
     usageDiv.innerHTML = '<h3>PDF Usage Statistics Per Query</h3>';
@@ -307,15 +306,14 @@ function displayQueryUsage(queryUsage) {
     usageDiv.innerHTML += usageHTML;
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('myPromptToPDF');
-    const inputField = document.getElementById('inputFieldId');
+    const inputField = document.getElementById('queryPDF');
+    const submitButton = document.querySelector('button[onclick="askPDF()"]');
 
-    document.addEventListener('keypress', (event) => {
+    inputField.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
-            event.preventDefault();
-            form.submit();
+            event.preventDefault(); // Prevent the default action
+            submitButton.click(); // Programmatically click the Submit button
         }
     });
 });

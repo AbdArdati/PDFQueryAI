@@ -140,7 +140,11 @@ To use the `Ollama` model, follow these steps to download and install it based o
 ### 5. **Run the Application**:
      
     python app.py
-     
+
+### Disclaimer 📝
+Please be aware that this application is provided "as is," without any guarantee of functionality or reliability. It's important to note that the codebase may not adhere to best practices in terms of tidiness and organisation, and there is significant room for improvement and bug fixes. While I try to enhance the application, I plan to release a new version in the future as time permits. 
+
+The developers disclaim all responsibility for bugs or issues, stating use is at one's own risk. Users are encouraged to contribute but the developers are not liable for any damages from using the application.
 
 ## License 🛡️
 
@@ -159,3 +163,4 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+

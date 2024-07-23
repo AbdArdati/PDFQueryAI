@@ -324,32 +324,43 @@ def pdfPost():
     }
     return jsonify(response)
 
-
 @app.route("/list_documents", methods=["GET"])
 def list_documents():
     try:
-        # Initialize the vector store
-        vector_store = Chroma(persist_directory=folder_path, embedding_function=embedding)
+        print(f"folder_path: {folder_path}")
+        print(f"embedding function: {embedding}")
 
-        if not vector_store:
-            raise RuntimeError("Vector store initialization failed")
+        if not os.path.exists(folder_path):
+            print(f"The directory {folder_path} does not exist. Initializing vector store...")
+            os.makedirs(folder_path, exist_ok=True)  # Ensure the folder exists before initializing
 
-        # Get data from the vector store
-        db_data = vector_store.get()
-        if not db_data or "metadatas" not in db_data:
+        print("Initializing vector store...")
+        try:
+            vector_store = Chroma(persist_directory=folder_path, embedding_function=embedding)
+        except Exception as init_error:
+            print(f"Failed to initialize vector store: {init_error}")
+            return jsonify({"error": "Failed to initialize vector store"}), 500
+        print("Vector store initialized.")
+
+        print("Fetching data from vector store...")
+        try:
+            db_data = vector_store.get()
+        except Exception as fetch_error:
+            print(f"Failed to fetch data from vector store: {fetch_error}")
+            return jsonify({"error": "Failed to fetch data from vector store"}), 500
+
+        if not db_data or "metadatas" not in db_data or not db_data["metadatas"]:
+            print("No documents found in vector store.")
             return jsonify({"message": "No documents found"}), 200
 
-        # Extract documents
         documents = [{"source": metadata.get("source", "Unknown")} for metadata in db_data["metadatas"]]
-
-        # Return the list of documents
         response = {"documents": documents}
+        print("Documents extracted:", documents)
         return jsonify(response), 200
 
     except Exception as e:
-        # Log the error and return a user-friendly message
         print(f"Error listing documents: {e}")
-        return jsonify({"error": "Failed to list documents. Please try again later."}), 500
+        return jsonify({"error": "An error occurred while listing documents. Please try again later."}), 500
 
 @app.route("/delete_pdf", methods=["POST"])
 def delete_pdf():
