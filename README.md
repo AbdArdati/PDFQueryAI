@@ -9,22 +9,39 @@ The application provides an interface for:
 - ❓ **Submitting queries to retrieve information from uploaded PDFs**.
 - 📊 **Tracking PDF usage statistics**.
 - 🔧 **Performing administrative operations like clearing data and deleting files**.
+- 🔍 **Viewing PDF files**
+- 📝 **Prompt templates management**
 
 ### Key Features 🔑
 
 1. **PDF Management**:
-   - **Upload PDFs**: Users can upload PDF files, which are then processed and stored in a database.
-   - **List PDFs**: Users can view a list of uploaded PDF files.
-   - **Delete PDFs**: Users can delete specific PDF files from the system.
+   - **Upload PDFs**: 📤 Users can upload PDF files through the upload interface. These files are processed and stored in the system.
+   - **List PDFs**: 📋 Users can view a list of all uploaded PDF files through the available PDFs interface.
+   - **Delete PDFs**: 🗑️ Users can remove specific PDF files using the delete functionality available in the PDF management interface.
+   - **View PDFs**: 👁️ Users can open and view the content of PDF files in a new browser tab directly from the list of PDFs.
 
 2. **Query Handling**:
-   - **Ask Questions**: Users can submit questions that the application attempts to answer using information from uploaded PDFs.
-   - **AI Integration**: Uses a language model to generate answers based on the contents of the PDFs and the provided query.
+   - **Ask Questions to PDF**: 🤔 Users can submit questions about the content of uploaded PDFs using the query interface. The application uses the AI model to provide answers based on the PDF contents.
+   - **AI Integration**: 🤖 The Ollama3.1 model is used to generate answers to queries from the content of the PDFs. This functionality is accessible through the AI query interface.
+  - **Prompt Templates**: 📝 Users can view and select from various prompt templates to guide the AI's responses, ensuring they are tailored to specific needs. (Currently in progress, with frontend Create, Update, and Delete to be implemented.)
 
 3. **Statistics and Administration**:
-   - **Clear Chat History**: Allows clearing of previous chat interactions.
-   - **Clear Database**: Deletes all stored data and PDFs.
-   - **PDF Usage Statistics**: Provides statistics on how often each PDF has been queried.
+   - **Clear Chat History**: 🧹 Users can clear previous chat interactions using the clear chat history button in the query section.
+   - **Clear Database**: 🚮 Deletes all stored PDFs and related data, effectively resetting the application’s state. This action is available in the database management section.
+   - **PDF Usage Statistics**: 📈 Provides information on how frequently each PDF has been queried, viewable through the statistics dashboard.
+
+### HTML Interfaces Overview 🖥️
+
+1. **Document Interaction Dashboard**:
+   - **Homepage**: 🏠 Features interfaces for asking questions about PDF content and interacting with the Ollama3 AI model. It also displays query and PDF usage statistics.
+   - **PDF Query Section**: ❓ Allows users to submit questions about PDFs and view responses.
+   - **AI Query Section**: 🤖 Provides functionality to query the Ollama3.1 AI model independently of PDFs.
+   - **Statistics Section**: 📊 Displays usage statistics for both queries and PDFs.
+
+2. **PDF Management and Statistics**:
+   - **Upload and List PDFs**: 📤📋 An interface to upload new PDFs, view a list of all uploaded PDFs, and access each PDF file.
+   - **Database Management**: 🗑️ Provides options to clear the database and manage stored PDFs.
+   - **Statistics Dashboard**: 📈 Shows statistics related to the total number of PDFs and documents in the vector store.
 
 ## Low-Level Overview 🔍
 
@@ -118,7 +135,7 @@ To use the `Ollama` model, follow these steps to download and install it based o
    Once Ollama is installed, start the llama3 model by running the following command in your terminal or command prompt:
 
    ```bash
-   ollama run llama3
+   ollama run llama3.1
    
 ### 2. **Clone the Repository**:
     
@@ -164,3 +181,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
+---
+**Developed by Abd Alsattar Ardati for the sake of exploring, learning, and sharing.**  
+Visit my [website](https://abd.ardati.org) for more information or contact me at abd.alsattar.ardati @ gmail.

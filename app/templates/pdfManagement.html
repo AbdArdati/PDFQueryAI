@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="static/js/script.js" defer></script>
+
+</head>
+<body>
+    <header>
+        <h1>Statistics Dashboard</h1>
+        <p>View statistics related to the uploaded PDFs and documents in the system.</p>
+    </header>
+    <div class="container card">
+        <nav class="navbar">
+            <div class="container">
+                <a href="{{ url_for('main.home') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('main.pdfManagement') }}" class="nav-link">PDF Management</a>
+                <!-- Add more links here as needed -->
+            </div>
+        </nav>
+        <div class="section-group">
+            <div class="card section">
+                <div class="upload-section">
+                    <h2>Upload New PDF</h2>
+                    <p>Upload a new PDF document to be processed and made available for querying.</p>
+                    <input type="file" id="pdfFile">
+                    <button onclick="uploadPDF()">Upload</button>
+                </div>
+            </div>
+
+            <div class="card section">
+                <div class="pdf-list-section">
+                    <h2>Available PDF Documents</h2>
+                    <p>View and access the list of PDFs that have been uploaded to the system.</p>
+                    <button onclick="listPDFs()">List PDFs</button>
+                    <ul id="pdfList"></ul>
+                </div>
+            </div>
+
+            <div class="card section">
+                <div class="clear-db-section">
+                    <h2>Database and File Management</h2>
+                    <p>Clear all stored data and uploaded files from the system. Use this carefully as it will delete all records.</p>
+                    <button class="primary" onclick="clearDatabase()">Clear Database</button>
+                </div>
+            </div>
+        </div>
+        <div class="section-group">
+            <div class="card section">
+                <h2>PDF Statistics</h2>
+                <p>Total PDFs: {{ pdf_count }}</p>
+            </div>
+        </div>
+
+        <div class="section-group">
+            <div class="card section">
+                <h2>Document Statistics</h2>
+                <p>Total Documents in Chroma DB: {{ doc_count }}</p>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <a href="{{ url_for('main.home') }}" class="button">Back to Home</a>
+        </div>
+    </div>
+</body>
+<footer>
+    <div class="footer-content">
+        <p>© 2024 Abd Alsattar Ardati. Created for exploration, learning, and sharing. 📚🔍</p>
+        <p>Licensed under Apache 2.0. Visit <a href="https://abd.ardati.org" target="_blank">abd.ardati.org</a> 🌐</p>
+    </div>
+</footer>
+</html>

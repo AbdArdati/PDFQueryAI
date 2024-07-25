@@ -1,0 +1,450 @@
+/* Root Variables */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #0056b3;
+    --highlight-color: #003d7a;
+    --text-color: #333;
+    --background-color: #f4f4f4;
+    --card-background: #fff;
+    --border-color: #ddd;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --transition-duration: 0.3s;
+}
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: var(--secondary-color);
+    padding: 10px 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    transition: background-color var(--transition-duration), color var(--transition-duration);
+}
+
+.nav-link:hover {
+    background-color: var(--highlight-color);
+    color: #ffd700;
+}
+
+/* Card Styles */
+.card {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Section Styles */
+.section-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.section {
+    flex: 1;
+    min-width: calc(50% - 20px);
+}
+
+h2 {
+    color: var(--text-color);
+    margin-top: 0;
+}
+
+/* Button Styles */
+button {
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color var(--transition-duration), transform var(--transition-duration);
+}
+
+button:hover {
+    background: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+/* Input Styles */
+input[type="file"], input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+
+/* List Styles */
+ul, ol {
+    padding: 0;
+    margin: 0;
+    list-style-position: inside;
+}
+
+li {
+    background: var(--card-background);
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+
+/* Container for response and resize handle */
+.response-container {
+    position: relative;
+    margin-top: 20px; /* Space from other elements */
+    width: 100%; /* Ensure it uses the full width of the card */
+    box-sizing: border-box; /* Include padding and border in width/height */
+}
+
+/* Response Section */
+.response {
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: #fff;
+    height: 150px; /* Set the default height */
+    max-height: 500px; /* Allow expansion downwards */
+    min-height: 100px; /* Minimum height of the container */
+    overflow-y: auto;  /* Add vertical scrollbar if content overflows */
+    box-sizing: border-box; /* Include padding and border in width/height */
+    width: 100%; /* Ensure it stays within the card width */
+}
+
+/* Resize Handle */
+.resize-handle {
+    width: 20px; /* Width of the handle */
+    height: 20px; /* Height of the handle */
+    background: var(--primary-color);
+    position: absolute;
+    bottom: 0;
+    right: 0; /* Position the handle in the bottom-right corner */
+    cursor: ns-resize; /* Cursor for vertical resize */
+    z-index: 10; /* Ensure it's above other content */
+    border-top-left-radius: 5px; /* Rounded top-left corner for aesthetic */
+    border-top-right-radius: 5px; /* Rounded top-right corner for aesthetic */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for better visibility */
+}
+
+/* Loading Spinner */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid var(--primary-color);
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    margin: 10px auto;
+}
+
+/* Spin Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Loading Message */
+.loading-message {
+    font-size: 16px;
+    color: var(--primary-color);
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* Statistics Section */
+.stats {
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Status Messages */
+.status-message {
+    font-size: 16px;
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Fade Out Animation */
+.fade-out {
+    opacity: 0;
+    transition: opacity 2s ease-out;
+}
+
+/* Button Styles (Additional) */
+.view-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.view-button:hover, .delete-button:hover {
+    opacity: 0.8;
+}
+
+/* Enhanced Styles for Prompt Container */
+#promptContainer {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: #f9f9f9;
+    box-shadow: var(--box-shadow);
+}
+
+#promptContainer p {
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Style for the select dropdown */
+#promptType {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+    transition: border-color var(--transition-duration) ease;
+}
+
+#promptType:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Container for each PDF item */
+.pdf-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Button container to hold buttons */
+.button-container {
+    display: flex;
+    gap: 10px; /* Adjust the space between buttons */
+}
+
+/* General button style */
+.button-container .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Specific button styles */
+.view-button {
+    background-color: #007bff;
+}
+
+.view-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+#pdfList {
+    margin: 20px; /* Adjust as needed for spacing around the list */
+}
+
+/* Accessibility Improvements */
+:focus {
+    outline: 3px solid var(--highlight-color);
+    outline-offset: 2px;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #0056b3;
+        --secondary-color: #007bff;
+        --highlight-color: #ffd700;
+        --text-color: #f4f4f4;
+        --background-color: #333;
+        --card-background: #444;
+        --border-color: #555;
+    }
+
+    body {
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+
+    .nav-link, button, .status-message, .loading-message {
+        color: #fff;
+    }
+
+    .card, .response, .stats, .status-message, .loading-message, #promptContainer, .pdf-item {
+        background: var(--card-background);
+        border-color: var(--border-color);
+    }
+
+    input[type="file"], input[type="text"], #promptType {
+        background-color: #555;
+        color: #fff;
+    }
+}
+
+/* Smooth Transitions for Hover and Focus */
+a, button, .nav-link, input[type="file"], input[type="text"], #promptType {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Consistent Spacing and Alignment */
+* {
+    box-sizing: border-box;
+}
+
+.container, .section-group, .button-container, #pdfList {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.section-group, .button-container {
+    justify-content: space-between;
+}
+
+/* Enhancements for Readability */
+body, h1, h2, p, .nav-link, button, input, .status-message, .loading-message {
+    line-height: 1.6;
+    font-weight: normal;
+}
+
+h1, h2 {
+    font-weight: bold;
+}
+
+footer {
+    background-color: #007bff; /* Primary color for footer background */
+    color: #fff; /* White text color */
+    padding: 20px 0; /* Padding around the content */
+    text-align: center; /* Center the text */
+    border-top: 5px solid #0056b3; /* Secondary color for a top border */
+}
+
+footer a {
+    color: #ffd700; /* Highlight color for links */
+    text-decoration: none; /* No underline for links */
+}
+
+footer a:hover {
+    color: #ffffff; /* White color on hover for contrast */
+    text-decoration: underline; /* Underline on hover for clarity */
+}
+
+.footer-content {
+    max-width: 1200px; /* Max width of the content */
+    margin: 0 auto; /* Center the content */
+    padding: 0 20px; /* Padding on the sides */
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        text-align: center; /* Center text for smaller screens */
+    }
+}
+
+.navigation {
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center items horizontally */
+    padding: 20px 0; /* Add some padding above and below */
+}
+
+.navigation .button {
+    background-color: #6c757d; /* Secondary button color */
+    color: #ffffff; /* Text color */
+    padding: 8px 16px; /* Smaller padding inside the button */
+    text-decoration: none; /* Remove underline from links */
+    border-radius: 4px; /* Slightly rounded corners for the button */
+    font-weight: normal; /* Normal text weight */
+    font-size: 0.9rem; /* Smaller font size */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for background color and transform */
+}
+
+.navigation .button:hover {
+    background-color: #5a6268; /* Slightly darker shade for hover effect */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}

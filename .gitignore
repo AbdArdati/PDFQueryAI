@@ -10,12 +10,12 @@ share/
 pyvenv.cfg
 
 # Ignore database directory contents, but keep the directory
-db/*
-!db/.gitkeep
+data/db/*
+!data/db/.gitkeep
 
 # Ignore PDF directory contents, but keep the directory
-pdf/*
-!pdf/.gitkeep
+data/pdf/*
+!data/pdf/.gitkeep
 
 # Ignore results directory
 results/

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Interaction Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/home.js" defer></script>
+    <script src="/static/js/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Welcome to the Document Interaction Dashboard</h1>
+            <p>Manage your PDFs, ask questions, and view usage statistics all in one place.</p>
+        </div>
+    </header>
+    <div class="container card">
+        <nav class="navbar">
+            <div class="container">
+                <a href="{{ url_for('main.home') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('main.pdfManagement') }}" class="nav-link" onclick="handleNavigation(event)">PDF Management</a>
+                <!-- Add more links here as needed -->
+            </div>
+        </nav>
+        <div class="card section">
+            <div class="pdf-query-section">
+                <h2>Ask About PDF Content</h2>
+                <div id="promptContainer">
+                    <p>Use the dropdown menu below to choose a prompt. This menu lists all the available prompt templates that will use your input and context from the PDFs. By picking a prompt, you ensure that the responses you receive are specifically tailored to your needs. Feel free to edit them, test what fits you, and add more!</p>
+                    <select id="promptType">
+                        <!-- Options will be populated here by JavaScript -->
+                    </select>
+                </div>
+                <input type="text" id="queryPDF" placeholder="Type your question about the PDF">
+                <button id="askPDFButton" onclick="askPDF()">Submit</button>
+                <div id="queryResponseContainerPDF" class="response-container">
+                    <div id="queryResponsePDF" class="response">
+                        <!-- Response content goes here -->
+                    </div>
+                    <div class="resize-handle"></div>
+                </div>
+                <button onclick="clearChatHistory()" style="margin-top: 10px;">Clear Chat History</button>
+                <span style="margin-left: 10px;"></span>
+                <span id="chatHistoryStatus" class="status-message"></span>
+            </div>
+        </div>
+        
+        <div class="card section">
+            <div class="query-section">
+                <h2>Ask AI</h2>
+                <p>Submit your questions to Ollama3.1 AI model with no embedding from PDFs. I would use this mostly to compare answers</p>
+                <input type="text" id="query" placeholder="Type your question here">
+                <button id="askAIButton" onclick="askAI()">Submit</button>
+                <button onclick="copyTextAndSubmit()">Copy Prompt from ASKPDF & Submit</button>
+                <div id="queryResponseContainerAI" class="response-container">
+                    <div id="queryResponseAI" class="response">
+                        <!-- Response content goes here -->
+                    </div>
+                    <div class="resize-handle"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-group">
+            <div class="card section">
+                <h2>Usage Statistics</h2>
+                <div class="query-usage-section">
+                    <h3>Query Usage Statistics</h3>
+                    <p>View statistics on how frequently different queries are made to the AI and PDF content.</p>
+                    <div id="queryUsageStats" class="stats"></div>       
+                </div>
+                <div class="pdf-usage-section">
+                    <h3>PDF Usage Statistics</h3>
+                    <p>Monitor how often each uploaded PDF is accessed or queried within the system.</p>
+                    <div id="pdfUsageStats" class="stats"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <a href="{{ url_for('main.pdfManagement') }}" class="button" onclick="handleNavigation(event)">PDF Management</a>
+        </div>    
+    </div>
+</body>
+<footer>
+    <div class="footer-content">
+        <p>© 2024 Abd Alsattar Ardati. Created for exploration, learning, and sharing. 📚🔍</p>
+        <p>Licensed under Apache 2.0. Visit <a href="https://abd.ardati.org" target="_blank">abd.ardati.org</a> 🌐</p>
+    </div>
+</footer>
+</html>
