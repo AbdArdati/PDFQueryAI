@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/AbdArdati/PDFQueryAI/blob/main/app/static/images/full_logo_cropped.png">
+</p>
+
 # AskItRight: AI-Powered PDF Query Application 🚀
 
 This repository contains a Flask web application that allows users to upload PDF documents, query their contents, and retrieve answers using an AI language model. The application integrates several functionalities to manage PDFs, handle user queries, and maintain usage statistics.
@@ -42,6 +46,15 @@ The application provides an interface for:
    - **Upload and List PDFs**: 📤📋 An interface to upload new PDFs, view a list of all uploaded PDFs, and access each PDF file.
    - **Database Management**: 🗑️ Provides options to clear the database and manage stored PDFs.
    - **Statistics Dashboard**: 📈 Shows statistics related to the total number of PDFs and documents in the vector store.
+
+### Examples
+
+| Image | Description |
+|-------|-------------|
+| <img src="https://github.com/AbdArdati/PDFQueryAI/blob/main/app/static/images/Home_Example_1.png" alt="Home Example" width="400" /> | This screenshot shows the functionality of using PDFs with the 'Essay Expert' prompt template. At the top, the system leverages PDF content for detailed responses, while the lower section illustrates responses generated without PDFs. |
+| <img src="https://github.com/AbdArdati/PDFQueryAI/blob/main/app/static/images/Home_Example_2.png" alt="Home Example" width="400" /> | This example demonstrates the advanced capabilities of the 'Essays Expert' prompt template. The screenshot highlights how the system utilises PDF content to generate comprehensive responses at the top, while the lower section shows the output generated without PDFs, illustrating the impact of including detailed content. |
+| <img src="https://github.com/AbdArdati/PDFQueryAI/blob/main/app/static/images/Home_Example_3.png" alt="Home Example" width="400" /> | This screenshot reveals the limitations of the current app, indicating that it may struggle with queries beyond the scope of the provided documents. It underscores the need for further improvements and extensive testing to enhance the model's accuracy and robustness. |
+| <img src="https://github.com/AbdArdati/PDFQueryAI/blob/main/app/static/images/PDF_Management_Eaxmple.png" alt="Home Example" width="400" /> | This screenshot demonstrates the PDF Management & Statistics Dashboard, showcasing how users can view detailed statistics related to the uploaded PDFs and documents within the system. |
 
 ## Installation Instructions ⚙️
 
