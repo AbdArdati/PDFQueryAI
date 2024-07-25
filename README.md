@@ -47,7 +47,7 @@ The application provides an interface for:
 
 ### System Requirements 🖥️
 
-For Ollama3.1 8B, ensure your system has at least 16 GB of RAM, and reasonable disk space; a GPU is recommended for models with 70B parameters or higher.
+For Ollama3.1 8B, ensure your system has at least 16 GB of RAM, and reasonable disk space for a reasonable performance; a GPU is recommended for models with 70B parameters or higher.
 
 ### 1. Download and Install Ollama
 
