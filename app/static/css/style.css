@@ -27,19 +27,64 @@ body {
     padding: 20px;
 }
 
+
 /* Header Styles */
 header {
     background-color: var(--primary-color);
     color: #fff;
-    padding: 20px 0;
+    padding: 10px 10px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 5px solid #0056b3;
+    margin-bottom: 20px;
+}
+
+.title-wrapper {
+    position: relative;
+    display: inline-block;
 }
 
 header h1 {
     margin: 0;
     font-size: 2.5em;
     font-weight: 700;
+    color: #ffffff;
+}
+
+.ai-powered {
+    position: absolute;
+    top: 100%;
+    left: 101%;
+    transform: translateX(-50%);
+    font-weight: normal;
+    color: #FFFFFF;
+    background-color: transparent;
+    border-radius: 5px;
+    font-size: 13px;
+    margin-top: -10px;
+    white-space: nowrap;
+}
+
+header h2 {
+    font-size: 20px;
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+    .ai-powered {
+        position: static;
+        transform: none;
+        margin-top: 10px;
+        white-space: normal; /* Allow text to wrap */
+        display: block;
+        text-align: center;
+    }
+
+    .title-wrapper {
+        text-align: center;
+    }
 }
 
 /* Navbar Styles */
@@ -50,8 +95,23 @@ header h1 {
 
 .navbar .container {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-between; /* Space between logo and links */
+}
+
+.navbar-logo {
+    flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
+.header-image {
+    width: 70px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Space between the image and text */
+}
+
+.navbar-links {
+    display: flex;
+    gap: 15px; /* Space between nav links */
 }
 
 .nav-link {
@@ -138,9 +198,9 @@ li {
 /* Container for response and resize handle */
 .response-container {
     position: relative;
-    margin-top: 20px; /* Space from other elements */
-    width: 100%; /* Ensure it uses the full width of the card */
-    box-sizing: border-box; /* Include padding and border in width/height */
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Response Section */
@@ -149,27 +209,27 @@ li {
     border: 1px solid var(--border-color);
     border-radius: 5px;
     background: #fff;
-    height: 150px; /* Set the default height */
-    max-height: 500px; /* Allow expansion downwards */
-    min-height: 100px; /* Minimum height of the container */
-    overflow-y: auto;  /* Add vertical scrollbar if content overflows */
-    box-sizing: border-box; /* Include padding and border in width/height */
-    width: 100%; /* Ensure it stays within the card width */
+    height: 150px;
+    max-height: 500px;
+    min-height: 100px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 /* Resize Handle */
 .resize-handle {
-    width: 20px; /* Width of the handle */
-    height: 20px; /* Height of the handle */
+    width: 20px;
+    height: 20px;
     background: var(--primary-color);
     position: absolute;
     bottom: 0;
-    right: 0; /* Position the handle in the bottom-right corner */
-    cursor: ns-resize; /* Cursor for vertical resize */
-    z-index: 10; /* Ensure it's above other content */
-    border-top-left-radius: 5px; /* Rounded top-left corner for aesthetic */
-    border-top-right-radius: 5px; /* Rounded top-right corner for aesthetic */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for better visibility */
+    right: 0;
+    cursor: ns-resize;
+    z-index: 10;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Loading Spinner */
@@ -282,21 +342,45 @@ li {
 
 /* Container for each PDF item */
 .pdf-item {
+    display: flex;
+    justify-content: space-between; /* Space between content and buttons */
+    align-items: center; /* Align items vertically in the center */
     margin-bottom: 20px;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
-    background-color: #f9f9f9;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: var(--card-background);
 }
+
+
+
 
 /* Button container to hold buttons */
 .button-container {
     display: flex;
-    gap: 10px; /* Adjust the space between buttons */
+    gap: 10px; /* Space between buttons */
 }
+
+/* General button style */
+.button-container .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-container .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color var(--transition-duration), transform var(--transition-duration);
+}
+
 
 /* General button style */
 .button-container .btn {
@@ -327,7 +411,7 @@ li {
 }
 
 #pdfList {
-    margin: 20px; /* Adjust as needed for spacing around the list */
+    margin: 20px;
 }
 
 /* Accessibility Improvements */
@@ -398,53 +482,102 @@ h1, h2 {
 }
 
 footer {
-    background-color: #007bff; /* Primary color for footer background */
-    color: #fff; /* White text color */
-    padding: 20px 0; /* Padding around the content */
-    text-align: center; /* Center the text */
-    border-top: 5px solid #0056b3; /* Secondary color for a top border */
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 5px solid #0056b3;
 }
 
 footer a {
-    color: #ffd700; /* Highlight color for links */
-    text-decoration: none; /* No underline for links */
+    color: #ffd700;
+    text-decoration: none;
 }
 
 footer a:hover {
-    color: #ffffff; /* White color on hover for contrast */
-    text-decoration: underline; /* Underline on hover for clarity */
+    color: #ffffff;
+    text-decoration: underline;
 }
 
 .footer-content {
-    max-width: 1200px; /* Max width of the content */
-    margin: 0 auto; /* Center the content */
-    padding: 0 20px; /* Padding on the sides */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 @media (max-width: 768px) {
     .footer-content {
-        text-align: center; /* Center text for smaller screens */
+        text-align: center;
     }
 }
 
 .navigation {
-    display: flex; /* Use flexbox for layout */
-    justify-content: center; /* Center items horizontally */
-    padding: 20px 0; /* Add some padding above and below */
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
 }
 
 .navigation .button {
-    background-color: #6c757d; /* Secondary button color */
-    color: #ffffff; /* Text color */
-    padding: 8px 16px; /* Smaller padding inside the button */
-    text-decoration: none; /* Remove underline from links */
-    border-radius: 4px; /* Slightly rounded corners for the button */
-    font-weight: normal; /* Normal text weight */
-    font-size: 0.9rem; /* Smaller font size */
-    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for background color and transform */
+    background-color: #6c757d;
+    color: #ffffff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: normal;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .navigation .button:hover {
-    background-color: #5a6268; /* Slightly darker shade for hover effect */
-    transform: translateY(-2px); /* Slight lift effect on hover */
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.app-name {
+    font-weight: bold;
+    color: #4CAF50;
+    margin-right: 10px;
+}
+
+
+.header-image {
+    width: 70px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.welcome {
+    font-family: 'Brush Script MT', cursive; /* Example of a handwritten-style font */
+    font-size: 35px; /* Adjust size as needed */
+    color: #ffffff; /* Example color, adjust as needed */
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .pdf-item {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        padding: 15px;
+    }
+
+    .button-container {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px;
+        justify-content: center; /* Center buttons on smaller screens */
+    }
+
+    .button-container .btn {
+        width: 100%; /* Make buttons full width on small screens */
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pdf-item {
+        padding: 10px;
+    }
+
+    .button-container .btn {
+        padding: 10px;
+        font-size: 14px;
+    }
 }

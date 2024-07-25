@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statistics</title>
+    <title>PDF Management</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="static/js/script.js" defer></script>
-
 </head>
+
 <body>
     <header>
-        <h1>Statistics Dashboard</h1>
-        <p>View statistics related to the uploaded PDFs and documents in the system.</p>
-    </header>
+        <div class="header-content">
+            <div class="title-wrapper">
+                <h1>
+                    <span class="welcome">Welcome to</span> AskItRight
+                </h1>
+                <div class="ai-powered">
+                    AI-Powered PDF Query Application (Ollama3.1) 🚀
+                </div>
+            </div>
+            <h2>PDF Management & Statistics Dashboard</h2>
+            <p>View statistics related to the uploaded PDFs and documents in the system.</p>
+        </div>
+    </header> 
+
     <div class="container card">
         <nav class="navbar">
             <div class="container">
-                <a href="{{ url_for('main.home') }}" class="nav-link">Home</a>
-                <a href="{{ url_for('main.pdfManagement') }}" class="nav-link">PDF Management</a>
-                <!-- Add more links here as needed -->
+                <div class="navbar-logo">
+                    <img src="{{ url_for('static/images', filename='images/logo.png') }}" alt="Header Image" class="header-image">
+                </div>
+                <div class="navbar-links">
+                    <a href="{{ url_for('main.home') }}" class="nav-link">Home</a>
+                    <a href="{{ url_for('main.pdfManagement') }}" class="nav-link" onclick="handleNavigation(event)">PDF Management</a>
+                    <!-- Add more links here as needed -->
+                </div>
             </div>
         </nav>
+
         <div class="section-group">
             <div class="card section">
                 <div class="upload-section">
@@ -30,7 +49,9 @@
                     <button onclick="uploadPDF()">Upload</button>
                 </div>
             </div>
+        </div>
 
+        <div class="section-group">
             <div class="card section">
                 <div class="pdf-list-section">
                     <h2>Available PDF Documents</h2>
@@ -39,7 +60,9 @@
                     <ul id="pdfList"></ul>
                 </div>
             </div>
+        </div>
 
+        <div class="section-group">
             <div class="card section">
                 <div class="clear-db-section">
                     <h2>Database and File Management</h2>
@@ -48,6 +71,7 @@
                 </div>
             </div>
         </div>
+
         <div class="section-group">
             <div class="card section">
                 <h2>PDF Statistics</h2>
@@ -66,11 +90,13 @@
             <a href="{{ url_for('main.home') }}" class="button">Back to Home</a>
         </div>
     </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2024 Abd Alsattar Ardati. Created for exploration, learning, and sharing. 📚🔍</p>
+            <p>Licensed under Apache 2.0. Visit <a href="https://abd.ardati.org" target="_blank">abd.ardati.org</a> 🌐</p>
+        </div>
+    </footer>
 </body>
-<footer>
-    <div class="footer-content">
-        <p>© 2024 Abd Alsattar Ardati. Created for exploration, learning, and sharing. 📚🔍</p>
-        <p>Licensed under Apache 2.0. Visit <a href="https://abd.ardati.org" target="_blank">abd.ardati.org</a> 🌐</p>
-    </div>
-</footer>
+
 </html>

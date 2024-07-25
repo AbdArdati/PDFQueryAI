@@ -1,4 +1,4 @@
-# AI-Powered PDF Query Application 🚀
+# AskItRight: AI-Powered PDF Query Application 🚀
 
 This repository contains a Flask web application that allows users to upload PDF documents, query their contents, and retrieve answers using an AI language model. The application integrates several functionalities to manage PDFs, handle user queries, and maintain usage statistics.
 
@@ -33,7 +33,7 @@ The application provides an interface for:
 ### HTML Interfaces Overview 🖥️
 
 1. **Document Interaction Dashboard**:
-   - **Homepage**: 🏠 Features interfaces for asking questions about PDF content and interacting with the Ollama3 AI model. It also displays query and PDF usage statistics.
+   - **Homepage**: 🏠 Features interfaces for asking questions about PDF content and interacting with the Ollama3.1 AI model. It also displays query and PDF usage statistics.
    - **PDF Query Section**: ❓ Allows users to submit questions about PDFs and view responses.
    - **AI Query Section**: 🤖 Provides functionality to query the Ollama3.1 AI model independently of PDFs.
    - **Statistics Section**: 📊 Displays usage statistics for both queries and PDFs.
@@ -43,12 +43,56 @@ The application provides an interface for:
    - **Database Management**: 🗑️ Provides options to clear the database and manage stored PDFs.
    - **Statistics Dashboard**: 📈 Shows statistics related to the total number of PDFs and documents in the vector store.
 
-## Low-Level Overview 🔍
+## Installation Instructions ⚙️
 
-### Initialization and Setup
+### System Requirements 🖥️
 
-- **Flask Application**: The `Flask` instance is created to handle HTTP requests and route them to appropriate functions.
-- **Global Variables**: These include the AI model (`cached_llm`), text embeddings (`embedding`), and a text splitter (`text_splitter`). The application also maintains directories for storing PDFs and vector store data.
+For Ollama3.1 8B, ensure your system has at least 16 GB of RAM, and reasonable disk space; a GPU is recommended for models with 70B parameters or higher.
+
+### 1. Download and Install Ollama
+
+To use the `Ollama` model, follow these steps to download and install it based on your operating system:
+
+1. **Visit the Ollama Download Page:**
+   Go to [Ollama Download Page](https://ollama.com/download).
+
+2. **Download the Installer:**
+   Choose the appropriate installer for your operating system and download it.
+
+3. **Install Ollama:**
+   Follow the installation instructions provided on the download page for your specific operating system.
+
+4. **Verify Installation:**
+   After installation, verify that Ollama is installed correctly by running the following command in your terminal or command prompt:
+
+   ```bash
+   ollama --version
+
+5. **Run the Llama3 Model:**
+   Once Ollama is installed, start the llama3 model by running the following command in your terminal or command prompt:
+
+   ```bash
+   ollama run llama3.1
+   ```
+  When you run `ollama run llama3.1`, it defaults to using configuration 8b unless you specify otherwise.
+
+### 2. **Clone the Repository**:
+    
+    git clone https://github.com/AbdArdati/PDFQueryAI.git
+    cd PDFQueryAI 
+
+### 3. **Create a Virtual Environment**:
+    
+    python3 -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+
+### 4. **Install Dependencies**:
+    
+    pip install -r requirements.txt
+
+### 5. **Run the Application**:
+     
+    python app.py
 
 ### Endpoints and Their Functions
 
@@ -106,57 +150,24 @@ The application provides an interface for:
 
 - The application includes basic error handling for missing data, file operations, and vector store interactions. For example, if a file is not found or an operation fails, the application returns an appropriate error message and HTTP status code.
 
+### Release Information 🚀
+
+**Current Version:** `v1.0.0-beta`
+
+**Release Date:** `25/07/2024`
+
+**Description:** This is the beta release of AskItRight. It includes features for uploading, managing, and querying PDF documents using an AI model, as well as basic statistics and administrative functionalities.
+
+**Changelog:**
+- Initial beta release with core functionalities.
+- Added PDF upload, query, and management features.
+- Integrated AI model for querying PDF content.
+- Implemented basic statistics and database management features.
+
 ### Summary 📝
 
 Overall, the application provides a structured way to manage and interact with PDF documents using an AI model. It integrates file management, data processing, and querying capabilities into a Flask web service, allowing users to upload, query, and manage PDFs while also keeping track of usage statistics and providing administrative functionalities.
 
-## Installation Instructions ⚙️
-
-### 1. Download and Install Ollama
-
-To use the `Ollama` model, follow these steps to download and install it based on your operating system:
-
-1. **Visit the Ollama Download Page:**
-   Go to [Ollama Download Page](https://ollama.com/download).
-
-2. **Download the Installer:**
-   Choose the appropriate installer for your operating system and download it.
-
-3. **Install Ollama:**
-   Follow the installation instructions provided on the download page for your specific operating system.
-
-4. **Verify Installation:**
-   After installation, verify that Ollama is installed correctly by running the following command in your terminal or command prompt:
-
-   ```bash
-   ollama --version
-
-5. **Run the Llama3 Model:**
-   Once Ollama is installed, start the llama3 model by running the following command in your terminal or command prompt:
-
-   ```bash
-   ollama run llama3.1
-   
-### 2. **Clone the Repository**:
-    
-    git clone https://github.com/AbdArdati/PDFQueryAI.git
-    cd PDFQueryAI
-   
-
-### 3. **Create a Virtual Environment**:
-    
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    
-
-### 4. **Install Dependencies**:
-    
-    pip install -r requirements.txt
-    
-
-### 5. **Run the Application**:
-     
-    python app.py
 
 ### Disclaimer 📝
 Please be aware that this application is provided "as is," without any guarantee of functionality or reliability. It's important to note that the codebase may not adhere to best practices in terms of tidiness and organisation, and there is significant room for improvement and bug fixes. While I try to enhance the application, I plan to release a new version in the future as time permits. 

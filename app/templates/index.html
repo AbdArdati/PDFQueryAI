@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Interaction Dashboard</title>
+    <title>Home - PDF Interaction Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="/static/js/home.js" defer></script>
     <script src="/static/js/script.js" defer></script>
@@ -11,16 +12,29 @@
 <body>
     <header>
         <div class="header-content">
-            <h1>Welcome to the Document Interaction Dashboard</h1>
+            <div class="title-wrapper">
+                <h1>
+                    <span class="welcome">Welcome to</span> AskItRight
+                </h1>
+                <div class="ai-powered">
+                    AI-Powered PDF Query Application (Ollama3.1) 🚀
+                </div>
+            </div>
+            <h2>Document Interaction Dashboard</h2>
             <p>Manage your PDFs, ask questions, and view usage statistics all in one place.</p>
         </div>
-    </header>
+    </header>    
     <div class="container card">
         <nav class="navbar">
             <div class="container">
-                <a href="{{ url_for('main.home') }}" class="nav-link">Home</a>
-                <a href="{{ url_for('main.pdfManagement') }}" class="nav-link" onclick="handleNavigation(event)">PDF Management</a>
-                <!-- Add more links here as needed -->
+                <div class="navbar-logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Header Image" class="header-image">
+                </div>
+                <div class="navbar-links">
+                    <a href="{{ url_for('main.home') }}" class="nav-link">Home</a>
+                    <a href="{{ url_for('main.pdfManagement') }}" class="nav-link" onclick="handleNavigation(event)">PDF Management</a>
+                    <!-- Add more links here as needed -->
+                </div>
             </div>
         </nav>
         <div class="section-group">
@@ -28,12 +42,12 @@
                 <div class="pdf-query-section">
                     <h2>Ask About PDF Content</h2>
                     <div id="promptContainer">
-                        <p>Use the dropdown menu below to choose a prompt...</p>
+                        <p>Use the dropdown menu below to choose an appropriate prompt template...</p>
                         <select id="promptType">
                             <!-- Options populated by JavaScript -->
                         </select>
                     </div>
-                    <input type="text" id="queryPDF" placeholder="Type your question about the PDF">
+                    <input type="text" id="queryPDF" placeholder="Type your question about the PDF/s">
                     <button id="askPDFButton" onclick="askPDF()">Submit</button>
                     <div id="queryResponseContainer" class="response-container">
                         <div id="queryResponse" class="response">
@@ -48,19 +62,20 @@
             </div>
         </div>
         
-        
-        <div class="card section">
-            <div class="query-section">
-                <h2>Ask AI</h2>
-                <p>Submit your questions to Ollama3.1 AI model with no embedding from PDFs. I would use this mostly to compare answers</p>
-                <input type="text" id="query" placeholder="Type your question here">
-                <button id="askAIButton" onclick="askAI()">Submit</button>
-                <button onclick="copyTextAndSubmit()">Copy Prompt from ASKPDF & Submit</button>
-                <div id="queryResponseContainerAI" class="response-container">
-                    <div id="queryResponseAI" class="response">
-                        <!-- Response content goes here -->
+        <div class="section-group">
+            <div class="card section">
+                <div class="query-section">
+                    <h2>Ask AI</h2>
+                    <p>Submit your questions to Ollama3.1 AI model with no embedding from PDFs. I would use this mostly to compare answers</p>
+                    <input type="text" id="query" placeholder="Type your question here to the AI model without PDF">
+                    <button id="askAIButton" onclick="askAI()">Submit</button>
+                    <button onclick="copyTextAndSubmit()">Copy Prompt from ASKPDF & Submit</button>
+                    <div id="queryResponseContainerAI" class="response-container">
+                        <div id="queryResponseAI" class="response">
+                            <!-- Response content goes here -->
+                        </div>
+                        <div class="resize-handle"></div>
                     </div>
-                    <div class="resize-handle"></div>
                 </div>
             </div>
         </div>

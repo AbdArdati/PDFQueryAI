@@ -143,8 +143,7 @@ def aiPost():
 
 @bp.route("/ask_pdf", methods=["POST"])
 def askPDFPost():
-    query_usage_count = {}
-    pdf_usage_count = {}  # Added for tracking PDF usage count
+    query_usage_count = {}# Added for tracking PDF usage count
     print("POST /ask_pdf called")
 
     json_content = request.json

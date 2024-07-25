@@ -1,4 +1,5 @@
 from flask import Flask
+__version__ = '1.0.0-beta'
 
 def create_app():
     app = Flask(__name__, template_folder='templates')

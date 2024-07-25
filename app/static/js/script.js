@@ -125,7 +125,6 @@ async function listPDFs() {
     }
 }
 
-
 // Create a button with text, class, and click handler
 function createButton(text, className, onClick) {
     const button = document.createElement('button');
@@ -258,18 +257,26 @@ resizeHandles.forEach((resizeHandle, index) => {
     let isResizing = false;
     let startY, startHeight;
 
-    resizeHandle.addEventListener('mousedown', (event) => {
+    // Function to start resizing
+    function startResizing(event) {
         isResizing = true;
-        startY = event.clientY;
+        // Use 'touches[0].clientY' for touch events and 'clientY' for mouse events
+        startY = event.touches ? event.touches[0].clientY : event.clientY;
         startHeight = parseInt(document.defaultView.getComputedStyle(responseContainers[index].querySelector('.response')).height, 10);
 
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', stopResizing);
-    });
+        // Add touch event listeners
+        document.addEventListener('touchmove', handleMouseMove, { passive: false });
+        document.addEventListener('touchend', stopResizing);
+    }
 
+    // Function to handle mouse and touch move events
     function handleMouseMove(event) {
         if (isResizing) {
-            let newHeight = startHeight + (event.clientY - startY);
+            event.preventDefault(); // Prevent scrolling while resizing
+            let clientY = event.touches ? event.touches[0].clientY : event.clientY;
+            let newHeight = startHeight + (clientY - startY);
 
             if (newHeight < 100) { // Optional: Minimum height constraint
                 newHeight = 100;
@@ -278,9 +285,17 @@ resizeHandles.forEach((resizeHandle, index) => {
         }
     }
 
+    // Function to stop resizing
     function stopResizing() {
         isResizing = false;
         document.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('mouseup', stopResizing);
+        // Remove touch event listeners
+        document.removeEventListener('touchmove', handleMouseMove);
+        document.removeEventListener('touchend', stopResizing);
     }
+
+    // Listen for both mouse and touch start events
+    resizeHandle.addEventListener('mousedown', startResizing);
+    resizeHandle.addEventListener('touchstart', startResizing, { passive: false });
 });
