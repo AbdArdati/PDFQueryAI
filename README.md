@@ -205,6 +205,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
+## Code of Conduct
+
+We are committed to fostering a welcoming and inclusive community. Please read our [Code of Conduct](CODE_OF_CONDUCT.md) to understand our guidelines and expectations.
+
 ---
 **Developed by Abd Alsattar Ardati for the sake of exploring, learning, and sharing.**  
 Visit my [website](https://abd.ardati.org) for more information or contact me at abd.alsattar.ardati @ gmail.
