@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/AbdArdati/PDFQueryAI/blob/main/app/static/images/full_logo_cropped.png">
+  <img src="https://github.com/AbdArdati/PDFQueryAI/blob/main/app/static/images/full_logo.png">
 </p>
 
 # AskItRight: AI-Powered PDF Query Application 🚀
