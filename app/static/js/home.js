@@ -61,6 +61,11 @@ async function askPDF() {
     const responseDiv = document.getElementById('queryResponse');
     const promptType = document.getElementById('promptType').value;
 
+    if (!responseDiv) {
+        console.error('Element with ID "queryResponse" is missing.');
+        return;
+    }
+
     if (!query) {
         alert('Please enter a query.');
         return;
@@ -69,11 +74,14 @@ async function askPDF() {
     responseDiv.innerHTML = '<div class="spinner"></div><p class="loading-message">Fetching response, please wait...</p>';
 
     try {
+        console.log('Sending API request...'); // Debug log
         const result = await apiRequest('/ask_pdf', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ query, promptType }),
         });
+
+        console.log('API response received:', result); // Debug log
 
         if (result.disclaimer) {
             responseDiv.innerHTML = `<p>${result.disclaimer}</p>`;
@@ -85,6 +93,7 @@ async function askPDF() {
         if (result.query_usage) displayQueryUsage(result.query_usage);
     } catch (error) {
         responseDiv.innerHTML = `<p>An error occurred while processing the PDF query: ${error.message}</p>`;
+        console.error('Error in askPDF:', error); // Debug log
     }
 }
 

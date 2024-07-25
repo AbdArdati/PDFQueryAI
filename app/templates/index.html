@@ -23,28 +23,31 @@
                 <!-- Add more links here as needed -->
             </div>
         </nav>
-        <div class="card section">
-            <div class="pdf-query-section">
-                <h2>Ask About PDF Content</h2>
-                <div id="promptContainer">
-                    <p>Use the dropdown menu below to choose a prompt. This menu lists all the available prompt templates that will use your input and context from the PDFs. By picking a prompt, you ensure that the responses you receive are specifically tailored to your needs. Feel free to edit them, test what fits you, and add more!</p>
-                    <select id="promptType">
-                        <!-- Options will be populated here by JavaScript -->
-                    </select>
-                </div>
-                <input type="text" id="queryPDF" placeholder="Type your question about the PDF">
-                <button id="askPDFButton" onclick="askPDF()">Submit</button>
-                <div id="queryResponseContainerPDF" class="response-container">
-                    <div id="queryResponsePDF" class="response">
-                        <!-- Response content goes here -->
+        <div class="section-group">
+            <div class="card section">
+                <div class="pdf-query-section">
+                    <h2>Ask About PDF Content</h2>
+                    <div id="promptContainer">
+                        <p>Use the dropdown menu below to choose a prompt...</p>
+                        <select id="promptType">
+                            <!-- Options populated by JavaScript -->
+                        </select>
                     </div>
-                    <div class="resize-handle"></div>
+                    <input type="text" id="queryPDF" placeholder="Type your question about the PDF">
+                    <button id="askPDFButton" onclick="askPDF()">Submit</button>
+                    <div id="queryResponseContainer" class="response-container">
+                        <div id="queryResponse" class="response">
+                            <!-- Response content goes here -->
+                        </div>
+                        <div class="resize-handle"></div>
+                    </div>
+                    <button onclick="clearChatHistory()" style="margin-top: 10px;">Clear Chat History</button>
+                    <span style="margin-left: 10px;"></span>
+                    <span id="chatHistoryStatus" class="status-message"></span>
                 </div>
-                <button onclick="clearChatHistory()" style="margin-top: 10px;">Clear Chat History</button>
-                <span style="margin-left: 10px;"></span>
-                <span id="chatHistoryStatus" class="status-message"></span>
             </div>
         </div>
+        
         
         <div class="card section">
             <div class="query-section">
