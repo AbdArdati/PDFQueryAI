@@ -34,7 +34,13 @@ query_usage_count = {}
 chat_history = []
 
 # Initialize the Ollama model
-cached_llm = Ollama(model="llama3.1")
+# Initialize multiple LLMs
+llms = {
+    "llama": Ollama(model="llama3.1"),
+    "vicuna": Ollama(model="vicuna"),
+    "mistral": Ollama(model="mistral")
+}
+
 
 # Initialize the embedding model
 embedding = FastEmbedEmbeddings()
@@ -124,37 +130,41 @@ def pdfManagement():
     
 @bp.route("/ai", methods=["POST"])
 def aiPost():
-    query_usage_count = {}
     print("POST /ai called")
     json_content = request.json
     query = json_content.get("query")
+    selected_llm = json_content.get("llm", "llama")  # Default to "llama" if no LLM is specified
 
     if not query:
         return jsonify({"error": "No 'query' found in JSON request"}), 400
 
-    print(f"query: {query}")
+    if selected_llm not in llms:
+        return jsonify({"error": f"Unknown LLM: {selected_llm}"}), 400
 
-    response = cached_llm.invoke(query)
+    print(f"Query: {query}, LLM: {selected_llm}")
 
+    # Invoke the selected LLM
+    response = llms[selected_llm].invoke(query)
     print(response)
 
-    response_answer = {"answer": response}
-    return jsonify(response_answer)
+    return jsonify({"answer": response})
+
 
 @bp.route("/ask_pdf", methods=["POST"])
 def askPDFPost():
-    query_usage_count = {}# Added for tracking PDF usage count
     print("POST /ask_pdf called")
-
     json_content = request.json
     query = json_content.get("query")
     prompt_type = json_content.get("promptType")  # Get the prompt type
+    selected_llm = json_content.get("llm", "llama")  # Default to "llama" if no LLM is specified
 
     if not query:
         return jsonify({"error": "No 'query' found in JSON request"}), 400
 
-    print(f"**query**: {query}")
-    print(f"**prompt_type**: {prompt_type}")
+    if selected_llm not in llms:
+        return jsonify({"error": f"Unknown LLM: {selected_llm}"}), 400
+
+    print(f"Query: {query}, Prompt Type: {prompt_type}, LLM: {selected_llm}")
 
     # Dynamically select the prompt based on prompt_type
     prompt = PROMPTS.get(prompt_type)
@@ -167,12 +177,9 @@ def askPDFPost():
         db_data = vector_store.get()
 
         if not db_data.get("metadatas"):
-            print("Call ended since there are no documents available to process the query.")
             return jsonify({
                 "answer": "No documents available to process your query.",
                 "disclaimer": "No documents available to process your query. Upload some PDFs to enable document search.",
-                "pdf_usage": {},
-                "query_usage": {}
             })
 
         print("Creating retrieval chain")
@@ -195,9 +202,9 @@ def askPDFPost():
             ]
         )
         history_aware_retriever = create_history_aware_retriever(
-            llm=cached_llm, retriever=retriever, prompt=retriever_prompt
+            llm=llms[selected_llm], retriever=retriever, prompt=retriever_prompt
         )
-        document_chain = create_stuff_documents_chain(cached_llm, prompt)
+        document_chain = create_stuff_documents_chain(llms[selected_llm], prompt)
 
         retrieval_chain = create_retrieval_chain(
             history_aware_retriever,
@@ -210,38 +217,49 @@ def askPDFPost():
 
         print(chat_history)
 
-        sources = create_context_with_metadata(result.get("context", []))
+        sources = [
+            {
+                "source": doc.metadata.get("source", "Unknown"),
+                "content": doc.page_content,
+            }
+            for doc in result.get("context", [])
+        ]
 
-        # Update PDF usage count and query usage count as before
-        for doc in result["context"]:
-            pdf_source = doc.metadata.get("source")
-            if pdf_source in pdf_usage_count:
-                pdf_usage_count[pdf_source] += 1
-            else:
-                pdf_usage_count[pdf_source] = 1
-
-            if pdf_source in query_usage_count:
-                query_usage_count[pdf_source] += 1
-            else:
-                query_usage_count[pdf_source] = 1
-
-        if not sources:
-            answer = f"No relevant documents found for the query: {query}. This answer is generated without any PDF context."
-        else:
-            answer = result["answer"]
+        answer = result["answer"]
 
         response_answer = {
             "answer": answer,
             "sources": sources,
-            "pdf_usage": {pdf: {"count": count, "percentage": (count / sum(pdf_usage_count.values()) * 100) if sum(pdf_usage_count.values()) > 0 else 0} for pdf, count in pdf_usage_count.items()},
-            "query_usage": {pdf: {"count": count, "percentage": (count / sum(query_usage_count.values()) * 100) if sum(query_usage_count.values()) > 0 else 0} for pdf, count in query_usage_count.items()},
-            "disclaimer": "This answer is not based on any available PDF documents." if not sources else None
+            "pdf_usage": {
+                pdf: {
+                    "count": count,
+                    "percentage": (
+                        count / sum(pdf_usage_count.values()) * 100
+                        if sum(pdf_usage_count.values()) > 0
+                        else 0
+                    ),
+                }
+                for pdf, count in pdf_usage_count.items()
+            },
+            "query_usage": {
+                pdf: {
+                    "count": count,
+                    "percentage": (
+                        count / sum(query_usage_count.values()) * 100
+                        if sum(query_usage_count.values()) > 0
+                        else 0
+                    ),
+                }
+                for pdf, count in query_usage_count.items()
+            },
+            "disclaimer": "This answer is not based on any available PDF documents."
+            if not sources
+            else None,
         }
 
         return jsonify(response_answer)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 def create_context_with_metadata(documents):
     contexts = []
