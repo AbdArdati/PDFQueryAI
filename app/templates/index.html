@@ -46,6 +46,14 @@
                         <select id="promptType">
                             <!-- Options populated by JavaScript -->
                         </select>
+                        <div id="llmContainer" style="display: flex; align-items: center; margin-top: 10px;">
+                            <p style="margin-right: 10px;">Select LLM:</p>
+                            <select id="llmSelect" style="flex-shrink: 0; padding: 5px; font-size: 14px;">
+                                <option value="llama">Llama</option>
+                                <option value="mistral">Mistral</option>
+                                <option value="vicuna">Vicuna</option>
+                            </select>
+                        </div>
                     </div>
                     <input type="text" id="queryPDF" placeholder="Type your question about the PDF/s">
                     <button id="askPDFButton" onclick="askPDF()">Submit</button>
