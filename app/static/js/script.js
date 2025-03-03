@@ -1,10 +1,10 @@
+// Function to make API requests
 async function apiRequest(url, options = {}) {
     try {
         const response = await fetch(url, options);
 
         // Check if the response status is not OK
         if (!response.ok) {
-            // Attempt to parse the error response
             let errorMessage = `Failed to fetch from ${url}. Status: ${response.status}`;
 
             try {
@@ -31,7 +31,6 @@ async function apiRequest(url, options = {}) {
     }
 }
 
-
 async function uploadPDF() {
     const fileInput = document.getElementById('pdfFile');
     const file = fileInput.files[0];
@@ -50,22 +49,19 @@ async function uploadPDF() {
         const { status, filename, doc_len, chunk_len, error } = result;
         if (status === 'Successfully Uploaded') {
             showToast(`Success: ${status}\nFilename: ${filename}\nLoaded ${doc_len} documents\nLoaded len=${chunk_len} chunks`, type = 'success');
-            
-            // Call listPDFs function after successful upload
-            listPDFs();
+
+            listPDFs(); // Call listPDFs function after successful upload
         } else {
             showToast(error || 'An error occurred during the upload.', type = 'error');
         }
     } catch (error) {
-        // Display only the error message for 400 Bad Request
-        const errorMessage = error.message.includes('Status: 400') 
+        const errorMessage = error.message.includes('Status: 400')
             ? `${error.message.split('Response: ')[1]}`
             : `An error occurred while uploading the PDF: ${error.message}`;
 
         showToast(errorMessage, type = 'error');
     }
 }
-
 
 // Function to clear chat history
 async function clearChatHistory() {
@@ -85,8 +81,8 @@ async function clearChatHistory() {
         statusElement.innerText = `An error occurred while clearing chat history: ${error.message}`;
         statusElement.classList.remove('fade-out');
     }
-
 }
+
 // Function to list PDFs
 async function listPDFs() {
     try {
@@ -103,7 +99,7 @@ async function listPDFs() {
                     seenPDFs.add(source);
 
                     const listItem = document.createElement('div');
-                    listItem.className = 'pdf-item'; // Apply the new class
+                    listItem.className = 'pdf-item';
                     listItem.textContent = source;
 
                     const buttonContainer = document.createElement('div');
@@ -175,7 +171,6 @@ async function clearDatabase() {
 
         showToast(result.error ? `Error: ${result.error}` : 'Database and files cleared successfully', type = 'success');
 
-        // Call listPDFs function after successful database clearance
         if (!result.error) {
             listPDFs();
         }
@@ -184,118 +179,131 @@ async function clearDatabase() {
     }
 }
 
-
+// Function to show a toast notification
 async function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.textContent = message;
 
-    // Apply base styles
     toast.style.position = 'fixed';
-    toast.style.top = '5%'; // Center vertically
-    toast.style.left = '50%'; // Center horizontally
+    toast.style.top = '5%';
+    toast.style.left = '50%';
     toast.style.transform = 'translate(-50%, -50%)';
     toast.style.padding = '25px 30px';
-    toast.style.borderRadius = '12x';
+    toast.style.borderRadius = '12px';
     toast.style.color = '#fff';
     toast.style.fontFamily = 'Arial, sans-serif';
     toast.style.fontSize = '24px';
     toast.style.zIndex = '1000';
     toast.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
-    toast.style.transition = 'opacity 0.5s ease, top 0.5s ease'; // Add transition for top property
+    toast.style.transition = 'opacity 0.5s ease, top 0.5s ease';
 
-    // Style based on type
     switch (type) {
         case 'success':
-            toast.style.backgroundColor = '#4CAF50'; // Green
+            toast.style.backgroundColor = '#4CAF50';
             break;
         case 'error':
-            toast.style.backgroundColor = '#F44336'; // Red
+            toast.style.backgroundColor = '#F44336';
             break;
         case 'warning':
-            toast.style.backgroundColor = '#FFC107'; // Yellow
+            toast.style.backgroundColor = '#FFC107';
             break;
         case 'info':
         default:
-            toast.style.backgroundColor = '#2196F3'; // Blue
+            toast.style.backgroundColor = '#2196F3';
             break;
     }
 
-    // Append toast to the body
     document.body.appendChild(toast);
 
-    // Animate toast appearance
     toast.style.opacity = '1';
 
-    // Remove the toast after a timeout
     setTimeout(() => {
         toast.style.opacity = '0';
-        toast.style.top = '45%'; // Move up slightly before disappearing
+        toast.style.top = '45%';
         setTimeout(() => {
             document.body.removeChild(toast);
-        }, 500); // Allow time for fade-out animation
-    }, 3000); // Toast disappears after 3 seconds
+        }, 500);
+    }, 3000);
 }
 
+// Function to handle navigation
 function handleNavigation(event) {
-    // Check if the spinner is still visible
-    var spinner = document.querySelector('.spinner');
+    const spinner = document.querySelector('.spinner');
     if (spinner) {
-        // Show a confirmation dialog to the user
-        var confirmNavigation = confirm("You have an ongoing process. If you leave now, you may not get the answer you are waiting for. Do you want to continue?");
+        const confirmNavigation = confirm("You have an ongoing process. If you leave now, you may not get the answer you are waiting for. Do you want to continue?");
         if (!confirmNavigation) {
-            // Prevent the default action if the user does not confirm
             event.preventDefault();
         }
     }
 }
 
-// Select all response containers and resize handles
-const responseContainers = document.querySelectorAll('.response-container');
-const resizeHandles = document.querySelectorAll('.resize-handle');
+// Function to initialize the app
+function initializeApp() {
+    const llmDropdown = document.getElementById('llmSelect');
+    const askAIButton = document.getElementById('askAIButton');
+    const askPDFButton = document.getElementById('askPDFButton');
 
-resizeHandles.forEach((resizeHandle, index) => {
-    let isResizing = false;
-    let startY, startHeight;
+    if (llmDropdown && askAIButton && askPDFButton) {
+        askAIButton.addEventListener('click', async () => {
+            const selectedLLM = llmDropdown.value;
+            await askAI(selectedLLM);
+        });
 
-    // Function to start resizing
-    function startResizing(event) {
-        isResizing = true;
-        // Use 'touches[0].clientY' for touch events and 'clientY' for mouse events
-        startY = event.touches ? event.touches[0].clientY : event.clientY;
-        startHeight = parseInt(document.defaultView.getComputedStyle(responseContainers[index].querySelector('.response')).height, 10);
+        askPDFButton.addEventListener('click', async () => {
+            const selectedLLM = llmDropdown.value;
+            await askPDF(selectedLLM);
+        });
+    }
+}
 
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', stopResizing);
-        // Add touch event listeners
-        document.addEventListener('touchmove', handleMouseMove, { passive: false });
-        document.addEventListener('touchend', stopResizing);
+// Modify askAI and askPDF functions to include LLM selection
+async function askAI(selectedLLM) {
+    const query = document.getElementById('query').value;
+    const responseDiv = document.getElementById('queryResponseAI');
+
+    if (!query) {
+        alert('Please enter a query.');
+        return;
     }
 
-    // Function to handle mouse and touch move events
-    function handleMouseMove(event) {
-        if (isResizing) {
-            event.preventDefault(); // Prevent scrolling while resizing
-            let clientY = event.touches ? event.touches[0].clientY : event.clientY;
-            let newHeight = startHeight + (clientY - startY);
+    responseDiv.innerHTML = '<div class="spinner"></div><p class="loading-message">Fetching response, please wait...</p>';
 
-            if (newHeight < 100) { // Optional: Minimum height constraint
-                newHeight = 100;
-            }
-            responseContainers[index].querySelector('.response').style.height = `${newHeight}px`;
-        }
+    try {
+        const result = await apiRequest('/ai', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query, llm: selectedLLM }),
+        });
+
+        responseDiv.innerHTML = `<p>${result.answer || result.error}</p>`;
+    } catch (error) {
+        responseDiv.innerHTML = `<p>An error occurred while processing the query: ${error.message}</p>`;
+    }
+}
+
+async function askPDF(selectedLLM) {
+    const query = document.getElementById('queryPDF').value;
+    const responseDiv = document.getElementById('queryResponse');
+    const promptType = document.getElementById('promptType').value;
+
+    if (!query) {
+        alert('Please enter a query.');
+        return;
     }
 
-    // Function to stop resizing
-    function stopResizing() {
-        isResizing = false;
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', stopResizing);
-        // Remove touch event listeners
-        document.removeEventListener('touchmove', handleMouseMove);
-        document.removeEventListener('touchend', stopResizing);
-    }
+    responseDiv.innerHTML = '<div class="spinner"></div><p class="loading-message">Fetching response, please wait...</p>';
 
-    // Listen for both mouse and touch start events
-    resizeHandle.addEventListener('mousedown', startResizing);
-    resizeHandle.addEventListener('touchstart', startResizing, { passive: false });
-});
+    try {
+        const result = await apiRequest('/ask_pdf', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query, promptType, llm: selectedLLM }),
+        });
+
+        responseDiv.innerHTML = `<p>${result.answer || result.error}</p>`;
+    } catch (error) {
+        responseDiv.innerHTML = `<p>An error occurred while processing the PDF query: ${error.message}</p>`;
+    }
+}
+
+initializeApp();
